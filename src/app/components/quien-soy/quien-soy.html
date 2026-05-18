@@ -1,0 +1,96 @@
+<!-- quien-soy.html -->
+@if (cargando()) {
+  <p>Cargando...</p>
+}
+@else if (usuario()) {
+
+<div class="quien-container">
+
+  <div class="perfil-card">
+
+    <img
+      [src]="usuario().avatar_url"
+      class="perfil-img"
+      alt="Foto Perfil"
+    >
+
+    <h1 class="titulo">
+      &lt; QUIÉN SOY &gt;
+    </h1>
+
+    <h2 class="nombre">
+      {{ usuario().name }}
+    </h2>
+
+    <div class="info">
+
+      <p>
+        <img src="/assets/icons/usuario.png" class="icon" />
+        Usuario: {{ usuario().login }}
+      </p>
+
+      <p>
+        <img src="/assets/icons/escritura.png" class="icon" />
+        Bio: {{ usuario().bio }}
+      </p>
+
+      <p>
+        <img src="/assets/icons/estrella.png" class="icon" />
+        Repositorios públicos: {{ usuario().public_repos }}
+      </p>
+
+      <p>
+        <img src="/assets/icons/corazon.png" class="icon" />
+        Seguidores: {{ usuario().followers }}
+      </p>
+      
+
+    </div>
+
+    <a
+      [href]="usuario().html_url"
+      target="_blank"
+      class="github-btn"
+    >
+      VER GITHUB
+    </a>
+
+  </div>
+
+  <div class="game-card">
+
+    <h1>
+      <img src="/assets/icons/joystick.png" class="icon-H1" />
+      MI JUEGO
+    </h1>
+
+    <div class="pixel-box">
+
+      <p>
+        Elegí desarrollar una sopa de letras
+        con estética arcade retro.
+      </p>
+
+    </div>
+
+    <h1>
+      <img src="/assets/icons/signo-pregunta.png" class="icon-H1" />
+       CÓMO JUGAR
+    </h1>
+
+    <div class="pixel-box">
+
+      <p>
+        El jugador deberá encontrar
+        palabras ocultas dentro del
+        tablero en el menor tiempo posible 
+        para sumar puntos la mayor cantidad de puntos.
+      </p>
+
+    </div>
+
+  </div>
+
+</div>
+
+}

@@ -1,1 +1,58 @@
-<p>login works!</p>
+<div class="login-container">
+
+  <div class="login-card">
+
+    <h1 class="titulo">&lt; LOGIN &gt;</h1>
+
+    <form (ngSubmit)="onLogin()">
+
+      @if (error()) {
+        <p class="error-msg">{{ error() }}</p>
+      }
+
+      <input
+        type="email"
+        [(ngModel)]="emailValue"
+        name="email"
+        placeholder="Email"
+        required
+        class="retro-input"
+      />
+
+      <input
+        type="password"
+        [(ngModel)]="passwordValue"
+        name="password"
+        placeholder="Contraseña"
+        required
+        class="retro-input"
+      />
+
+      <button type="submit" class="retro-btn" [disabled]="cargando()">
+        @if (cargando()) { CARGANDO... } @else { INGRESAR }
+      </button>
+
+    </form>
+
+    <div class="divider">— ACCESO RÁPIDO —</div>
+
+    <div class="quick-btns">
+      <button class="retro-btn-quick" (click)="loginRapido('usuario1@test.com', '123456')">
+        USUARIO 1
+      </button>
+      <button class="retro-btn-quick" (click)="loginRapido('usuario2@test.com', '123456')">
+        USUARIO 2
+      </button>
+      <button class="retro-btn-quick" (click)="loginRapido('usuario3@test.com', '123456')">
+        USUARIO 3
+      </button>
+    </div>
+
+    <p class="registro-link">
+      ¿No tenés cuenta?
+      <a routerLink="/registro">Registrate</a>
+    </p>
+
+  </div>
+
+</div>

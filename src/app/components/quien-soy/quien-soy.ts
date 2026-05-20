@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { GithubService } from '../../services/github';
+import { GithubService } from '../../services/githubService/github';
 import { CommonModule } from '@angular/common';
 
 @Component({

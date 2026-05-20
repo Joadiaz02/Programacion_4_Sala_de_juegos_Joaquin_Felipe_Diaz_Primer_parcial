@@ -1,0 +1,126 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.home-card {
+  background: rgba(5, 5, 25, 0.9);
+  border: 3px solid #ff00ff;
+  box-shadow:
+    0 0 20px #ff00ff,
+    0 0 40px rgba(255, 0, 255, 0.4);
+  border-radius: 20px;
+  padding: 40px;
+  width: 600px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.titulo {
+  text-align: center;
+  color: #ff00ff;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  font-size: 30px;
+  text-shadow:
+    0 0 10px #ff00ff,
+    0 0 20px #ff00ff;
+}
+
+.usuario-nombre {
+  font-family: 'Orbitron', sans-serif;
+  color: #00e5ff;
+  font-size: 20px;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+.subtitulo {
+  font-family: 'Orbitron', sans-serif;
+  color: rgba(0, 229, 255, 0.7);
+  font-size: 14px;
+}
+
+.juegos-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  width: 100%;
+}
+
+.juego-btn {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.juego-btn:hover {
+  background: #00e5ff;
+  color: black;
+  box-shadow: 0 0 20px #00e5ff;
+}
+
+.auth-btns {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+}
+
+.retro-btn {
+  width: 100%;
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+.retro-btn:hover {
+  background: #00e5ff;
+  color: black;
+  box-shadow: 0 0 20px #00e5ff;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 15px 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  cursor: pointer;
+  transition: 0.3s;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.5);
+}
+
+.logout-btn:hover {
+  background: #ff00ff;
+  color: black;
+  box-shadow: 0 0 20px #ff00ff;
+}
+
+@media (max-width: 600px) {
+  .home-card {
+    width: 100%;
+  }
+
+  .juegos-grid {
+    grid-template-columns: 1fr;
+  }
+}

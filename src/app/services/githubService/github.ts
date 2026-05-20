@@ -1,6 +1,7 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
+import { GithubUsuario } from '../../interfaces/github.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -9,7 +10,7 @@ export class GithubService {
   private url = 'https://api.github.com/users/Joadiaz02';
   private http = inject(HttpClient);
 
-  usuario = signal<any>(null);
+  usuario = signal<GithubUsuario | null>(null);
   cargando = signal(true);
   error = signal<string | null>(null);
 
@@ -17,7 +18,7 @@ export class GithubService {
     this.cargando.set(true);
     this.error.set(null);
     try {
-      const data = await firstValueFrom(this.http.get(this.url));
+      const data = await firstValueFrom(this.http.get<GithubUsuario>(this.url));
       this.usuario.set(data);
     } catch (e: any) {
       this.error.set(e.message);

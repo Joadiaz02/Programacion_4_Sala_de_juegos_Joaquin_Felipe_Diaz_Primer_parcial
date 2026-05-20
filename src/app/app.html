@@ -29,24 +29,17 @@
   </div>
 
   <div class="nav-links">
-
-    <button routerLink="/">
-      HOME
-    </button>
-
-    <button routerLink="/login">
-      LOGIN
-    </button>
-
-    <button routerLink="/registro">
-      REGISTRO
-    </button>
-
-    <button routerLink="/quien-soy">
-      QUIÉN SOY
-    </button>
-
-  </div>
+  <button routerLink="/">HOME</button>
+  
+  @if (auth.isAuthenticated()) {
+    <button (click)="auth.logout()">CERRAR SESIÓN</button>
+  } @else {
+    <button routerLink="/login">LOGIN</button>
+    <button routerLink="/registro">REGISTRO</button>
+  }
+  
+  <button routerLink="/quien-soy">QUIÉN SOY</button>
+</div>
 
 </nav>
 

@@ -19,6 +19,8 @@ export class Login {
   cargando = signal(false);
 
   async onLogin() {
+    console.log('emailValue:', this.emailValue);
+  console.log('passwordValue:', this.passwordValue);
     this.error.set('');
     this.cargando.set(true);
     const ok = await this.auth.login(this.emailValue, this.passwordValue);

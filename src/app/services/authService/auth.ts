@@ -1,6 +1,7 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
 import { Router } from '@angular/router';
 import { SupabaseService } from '../supabaseService/supabase';
+import { Usuario } from '../../models/usuario.model';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -8,23 +9,25 @@ export class AuthService {
   private router = inject(Router);
   private supabase = inject(SupabaseService);
 
-  usuario = signal<any>(null);
+  usuario = signal<Usuario | null>(null);
   isAuthenticated = computed(() => this.usuario() !== null);
   userEmail = computed(() => this.usuario()?.email ?? 'Invitado');
-  userName = computed(() => this.usuario()?.user_metadata?.['nombre'] ?? 'Invitado');
+  userName = computed(() => this.usuario()?.nombre ?? 'Invitado');
 
   constructor() {
     this.checkSession();
-
-    this.supabase.getClient().auth.onAuthStateChange((_, session) => {
-      this.usuario.set(session?.user ?? null);
-    });
   }
 
   async checkSession() {
     const { data: { session } } = await this.supabase.getClient().auth.getSession();
     if (session?.user) {
-      this.usuario.set(session.user);
+      this.usuario.set({
+        id: session.user.id,
+        email: session.user.email ?? '',
+        nombre: session.user.user_metadata?.['nombre'] ?? '',
+        apellido: session.user.user_metadata?.['apellido'] ?? '',
+        edad: session.user.user_metadata?.['edad'] ?? 0
+      });
     }
   }
 
@@ -32,7 +35,13 @@ export class AuthService {
     const { data, error } = await this.supabase.getClient().auth.signInWithPassword({ email, password });
     if (error) return false;
     if (data.user) {
-      this.usuario.set(data.user);
+      this.usuario.set({
+        id: data.user.id,
+        email: data.user.email ?? '',
+        nombre: data.user.user_metadata?.['nombre'] ?? '',
+        apellido: data.user.user_metadata?.['apellido'] ?? '',
+        edad: data.user.user_metadata?.['edad'] ?? 0
+      });
       this.router.navigate(['/']);
       return true;
     }
@@ -47,7 +56,20 @@ export class AuthService {
     });
     if (error) return false;
     if (data.user) {
-      this.usuario.set(data.user);
+      await this.supabase.getClient().from('usuarios').insert([{
+        id: data.user.id,
+        email,
+        nombre,
+        apellido,
+        edad
+      }]);
+      this.usuario.set({
+        id: data.user.id,
+        email,
+        nombre,
+        apellido,
+        edad
+      });
       this.router.navigate(['/']);
       return true;
     }

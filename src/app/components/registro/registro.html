@@ -1,5 +1,4 @@
 <div class="registro-container">
-
   <div class="registro-card">
 
     <h1 class="titulo">&lt; REGISTRO &gt;</h1>
@@ -7,55 +6,30 @@
     <form (ngSubmit)="onRegistro()">
 
       @if (error()) {
-        <p class="error-msg">{{ error() }}</p>
+        <div class="alert alert-danger">{{ error() }}</div>
       }
 
-      <input
-        type="text"
-        [(ngModel)]="nombre"
-        name="nombre"
-        placeholder="Nombre"
-        required
-        class="retro-input"
-      />
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required class="form-control retro-input"/>
+      </div>
 
-      <input
-        type="text"
-        [(ngModel)]="apellido"
-        name="apellido"
-        placeholder="Apellido"
-        required
-        class="retro-input"
-      />
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="apellido" name="apellido" placeholder="Apellido" required class="form-control retro-input"/>
+      </div>
 
-      <input
-        type="number"
-        [(ngModel)]="edad"
-        name="edad"
-        placeholder="Edad"
-        required
-        class="retro-input"
-      />
+      <div class="mb-3">
+        <input type="number" [(ngModel)]="edad" name="edad" placeholder="Edad" required class="form-control retro-input"/>
+      </div>
 
-      <input
-        type="email"
-        [(ngModel)]="email"
-        name="email"
-        placeholder="Email"
-        required
-        class="retro-input"
-      />
+      <div class="mb-3">
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required class="form-control retro-input"/>
+      </div>
 
-      <input
-        type="password"
-        [(ngModel)]="password"
-        name="password"
-        placeholder="Contraseña"
-        required
-        class="retro-input"
-      />
+      <div class="mb-3">
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required class="form-control retro-input"/>
+      </div>
 
-      <button type="submit" class="retro-btn" [disabled]="cargando()">
+      <button type="submit" class="btn w-100 retro-btn" [disabled]="cargando()">
         @if (cargando()) { CARGANDO... } @else { REGISTRARSE }
       </button>
 
@@ -67,5 +41,4 @@
     </p>
 
   </div>
-
 </div>

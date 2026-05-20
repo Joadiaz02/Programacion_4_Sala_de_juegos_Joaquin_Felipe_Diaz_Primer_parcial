@@ -4,6 +4,7 @@ import { Home } from './components/home/home';
 import { Login } from './components/login/login';
 import { Registro } from './components/registro/registro';
 import { QuienSoyComponent } from './components/quien-soy/quien-soy';
+import { authGuard } from './guards/auth-guard';
 
 export const routes: Routes = [
   {
@@ -21,6 +22,7 @@ export const routes: Routes = [
   },
   {
   path: 'quien-soy',
-  component: QuienSoyComponent
+  component: QuienSoyComponent,
+  canActivate: [authGuard]
 }
 ];

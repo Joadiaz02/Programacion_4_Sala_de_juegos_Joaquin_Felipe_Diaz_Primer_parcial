@@ -65,3 +65,6 @@ logs/
 # Editor temp files
 *.swp
 *.swo 
+
+# Environment
+src/environments/environment.ts

@@ -9,7 +9,7 @@
   <div class="perfil-card">
 
     <img
-      [src]="usuario().avatar_url"
+      [src]="usuario()!.avatar_url"
       class="perfil-img"
       alt="Foto Perfil"
     >
@@ -19,36 +19,36 @@
     </h1>
 
     <h2 class="nombre">
-      {{ usuario().name }}
+      {{ usuario()!.name }}
     </h2>
 
     <div class="info">
 
       <p>
         <img src="/assets/icons/usuario.png" class="icon" />
-        Usuario: {{ usuario().login }}
+        Usuario: {{ usuario()!.login }}
       </p>
 
       <p>
         <img src="/assets/icons/escritura.png" class="icon" />
-        Bio: {{ usuario().bio }}
+        Bio: {{ usuario()!.bio }}
       </p>
 
       <p>
         <img src="/assets/icons/estrella.png" class="icon" />
-        Repositorios públicos: {{ usuario().public_repos }}
+        Repositorios públicos: {{ usuario()!.public_repos }}
       </p>
 
       <p>
         <img src="/assets/icons/corazon.png" class="icon" />
-        Seguidores: {{ usuario().followers }}
+        Seguidores: {{ usuario()!.followers }}
       </p>
       
 
     </div>
 
     <a
-      [href]="usuario().html_url"
+      [href]="usuario()!.html_url"
       target="_blank"
       class="github-btn"
     >
@@ -84,7 +84,7 @@
         El jugador deberá encontrar
         palabras ocultas dentro del
         tablero en el menor tiempo posible 
-        para sumar puntos la mayor cantidad de puntos.
+        para sumar la mayor cantidad de puntos.
       </p>
 
     </div>

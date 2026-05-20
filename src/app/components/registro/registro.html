@@ -1,1 +1,44 @@
-<p>registro works!</p>
+<div class="registro-container">
+  <div class="registro-card">
+
+    <h1 class="titulo">&lt; REGISTRO &gt;</h1>
+
+    <form (ngSubmit)="onRegistro()">
+
+      @if (error()) {
+        <div class="alert alert-danger">{{ error() }}</div>
+      }
+
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required class="form-control retro-input"/>
+      </div>
+
+      <div class="mb-3">
+        <input type="text" [(ngModel)]="apellido" name="apellido" placeholder="Apellido" required class="form-control retro-input"/>
+      </div>
+
+      <div class="mb-3">
+        <input type="number" [(ngModel)]="edad" name="edad" placeholder="Edad" required class="form-control retro-input"/>
+      </div>
+
+      <div class="mb-3">
+        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required class="form-control retro-input"/>
+      </div>
+
+      <div class="mb-3">
+        <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required class="form-control retro-input"/>
+      </div>
+
+      <button type="submit" class="btn w-100 retro-btn" [disabled]="cargando()">
+        @if (cargando()) { CARGANDO... } @else { REGISTRARSE }
+      </button>
+
+    </form>
+
+    <p class="login-link">
+      ¿Ya tenés cuenta?
+      <a routerLink="/login">Iniciá sesión</a>
+    </p>
+
+  </div>
+</div>

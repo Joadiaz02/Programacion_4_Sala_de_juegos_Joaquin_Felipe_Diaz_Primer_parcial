@@ -1,1 +1,57 @@
-<p>home works!</p>
+<div class="home-container">
+
+  <div class="home-card">
+
+    @if (auth.isAuthenticated()) {
+
+      <h1 class="titulo">&lt; BIENVENIDO &gt;</h1>
+
+      <p class="usuario-nombre">{{ auth.userName() }}</p>
+
+      <div class="juegos-grid">
+
+        <button class="juego-btn" routerLink="/ahorcado">
+          AHORCADO
+        </button>
+
+        <button class="juego-btn" routerLink="/mayor-menor">
+          MAYOR O MENOR
+        </button>
+
+        <button class="juego-btn" routerLink="/preguntados">
+          PREGUNTADOS
+        </button>
+
+        <button class="juego-btn" routerLink="/sopa-letras">
+          SOPA DE LETRAS
+        </button>
+
+      </div>
+
+      <button class="logout-btn" (click)="auth.logout()">
+        CERRAR SESIÓN
+      </button>
+
+    } @else {
+
+      <h1 class="titulo">&lt; SALA DE JUEGOS &gt;</h1>
+
+      <p class="subtitulo">Iniciá sesión para jugar</p>
+
+      <div class="auth-btns">
+
+        <button class="retro-btn" routerLink="/login">
+          INICIAR SESIÓN
+        </button>
+
+        <button class="retro-btn" routerLink="/registro">
+          REGISTRARSE
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

@@ -3,30 +3,102 @@
 
     <h1 class="titulo">&lt; REGISTRO &gt;</h1>
 
-    <form (ngSubmit)="onRegistro()">
+    <form [formGroup]="form" (ngSubmit)="onRegistro()">
 
       @if (error()) {
         <div class="alert alert-danger">{{ error() }}</div>
       }
 
       <div class="mb-3">
-        <input type="text" [(ngModel)]="nombre" name="nombre" placeholder="Nombre" required class="form-control retro-input"/>
+        <input
+          type="text"
+          formControlName="nombre"
+          placeholder="Nombre"
+          class="form-control retro-input"
+          [class.is-invalid]="f.nombre.invalid && f.nombre.touched"
+        />
+        @if (f.nombre.touched && f.nombre.errors?.['required']) {
+          <div class="invalid-feedback">El nombre es requerido</div>
+        }
+        @if (f.nombre.touched && f.nombre.errors?.['minlength']) {
+          <div class="invalid-feedback">Mínimo 2 caracteres</div>
+        }
+        @if (f.nombre.touched && f.nombre.errors?.['pattern']) {
+          <div class="invalid-feedback">Solo letras y espacios</div>
+        }
       </div>
 
       <div class="mb-3">
-        <input type="text" [(ngModel)]="apellido" name="apellido" placeholder="Apellido" required class="form-control retro-input"/>
+        <input
+          type="text"
+          formControlName="apellido"
+          placeholder="Apellido"
+          class="form-control retro-input"
+          [class.is-invalid]="f.apellido.invalid && f.apellido.touched"
+        />
+        @if (f.apellido.touched && f.apellido.errors?.['required']) {
+          <div class="invalid-feedback">El apellido es requerido</div>
+        }
+        @if (f.apellido.touched && f.apellido.errors?.['minlength']) {
+          <div class="invalid-feedback">Mínimo 2 caracteres</div>
+        }
+        @if (f.apellido.touched && f.apellido.errors?.['pattern']) {
+          <div class="invalid-feedback">Solo letras y espacios</div>
+        }
       </div>
 
       <div class="mb-3">
-        <input type="number" [(ngModel)]="edad" name="edad" placeholder="Edad" required class="form-control retro-input"/>
+        <input
+          type="number"
+          formControlName="edad"
+          placeholder="Edad"
+          class="form-control retro-input"
+          [class.is-invalid]="f.edad.invalid && f.edad.touched"
+        />
+        @if (f.edad.touched && f.edad.errors?.['required']) {
+          <div class="invalid-feedback">La edad es requerida</div>
+        }
+        @if (f.edad.touched && f.edad.errors?.['min']) {
+          <div class="invalid-feedback">Debe ser mayor de 18 años</div>
+        }
+        @if (f.edad.touched && f.edad.errors?.['max']) {
+          <div class="invalid-feedback">Debe ser menor de 99 años</div>
+        }
       </div>
 
       <div class="mb-3">
-        <input type="email" [(ngModel)]="email" name="email" placeholder="Email" required class="form-control retro-input"/>
+        <input
+          type="email"
+          formControlName="email"
+          placeholder="Email"
+          class="form-control retro-input"
+          [class.is-invalid]="f.email.invalid && f.email.touched"
+        />
+        @if (f.email.touched && f.email.errors?.['required']) {
+          <div class="invalid-feedback">El email es requerido</div>
+        }
+        @if (f.email.touched && f.email.errors?.['email']) {
+          <div class="invalid-feedback">El email no es válido</div>
+        }
       </div>
 
       <div class="mb-3">
-        <input type="password" [(ngModel)]="password" name="password" placeholder="Contraseña" required class="form-control retro-input"/>
+        <input
+          type="password"
+          formControlName="password"
+          placeholder="Contraseña"
+          class="form-control retro-input"
+          [class.is-invalid]="f.password.invalid && f.password.touched"
+        />
+        @if (f.password.touched && f.password.errors?.['required']) {
+          <div class="invalid-feedback">La contraseña es requerida</div>
+        }
+        @if (f.password.touched && f.password.errors?.['minlength']) {
+          <div class="invalid-feedback">Mínimo 6 caracteres</div>
+        }
+        @if (f.password.touched && f.password.errors?.['pattern']) {
+          <div class="invalid-feedback">Debe tener al menos una mayúscula y un número</div>
+        }
       </div>
 
       <button type="submit" class="btn w-100 retro-btn" [disabled]="cargando()">

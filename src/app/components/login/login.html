@@ -3,7 +3,7 @@
 
     <h1 class="titulo">&lt; LOGIN &gt;</h1>
 
-    <form (ngSubmit)="onLogin()">
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
 
       @if (error()) {
         <div class="alert alert-danger">{{ error() }}</div>
@@ -12,23 +12,33 @@
       <div class="mb-3">
         <input
           type="email"
-          [(ngModel)]="emailValue"
-          name="email"
+          formControlName="email"
           placeholder="Email"
-          required
           class="form-control retro-input"
+          [class.is-invalid]="f.email.invalid && f.email.touched"
         />
+        @if (f.email.touched && f.email.errors?.['required']) {
+          <div class="invalid-feedback">El email es requerido</div>
+        }
+        @if (f.email.touched && f.email.errors?.['email']) {
+          <div class="invalid-feedback">El email no es válido</div>
+        }
       </div>
 
       <div class="mb-3">
         <input
           type="password"
-          [(ngModel)]="passwordValue"
-          name="password"
+          formControlName="password"
           placeholder="Contraseña"
-          required
           class="form-control retro-input"
+          [class.is-invalid]="f.password.invalid && f.password.touched"
         />
+        @if (f.password.touched && f.password.errors?.['required']) {
+          <div class="invalid-feedback">La contraseña es requerida</div>
+        }
+        @if (f.password.touched && f.password.errors?.['minlength']) {
+          <div class="invalid-feedback">Mínimo 6 caracteres</div>
+        }
       </div>
 
       <button type="submit" class="btn w-100 retro-btn" [disabled]="cargando()">

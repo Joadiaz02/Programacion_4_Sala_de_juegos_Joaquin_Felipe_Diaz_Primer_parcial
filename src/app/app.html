@@ -1,45 +1,38 @@
-<!-- app.html -->
 <video autoplay muted loop id="bg-video">
-
-  <source
-    src="/assets/fondo-video.mp4"
-    type="video/mp4">
-
+  <source src="/assets/fondo-video.mp4" type="video/mp4">
 </video>
+
 <nav class="retro-navbar">
 
   <div class="logo-section">
-
-    <img
-      src="/assets/logo.png"
-      class="logo-img"
-      alt="JFD Games"
-    >
-
+    <img src="/assets/logo.png" class="logo-img" alt="JFD Games">
     <div>
-      <h1 class="logo-title">
-        Sala de Juegos
-      </h1>
-
-      <p class="logo-subtitle">
-        
-      </p>
+      <h1 class="logo-title">Sala de Juegos</h1>
+      <p class="logo-subtitle"></p>
     </div>
-
   </div>
 
   <div class="nav-links">
-  <button routerLink="/">HOME</button>
-  
-  @if (auth.isAuthenticated()) {
-    <button (click)="auth.logout()">CERRAR SESIÓN</button>
-  } @else {
-    <button routerLink="/login">LOGIN</button>
-    <button routerLink="/registro">REGISTRO</button>
-  }
-  
-  <button routerLink="/quien-soy">QUIÉN SOY</button>
-</div>
+
+    <button 
+      routerLink="/" 
+      routerLinkActive="active-btn"
+      [routerLinkActiveOptions]="{exact: true}"
+    >
+      HOME
+    </button>
+
+    <button routerLink="/quien-soy" routerLinkActive="active-btn">
+      QUIÉN SOY
+    </button>
+
+    @if (auth.isAuthenticated()) {
+      <button class="logout-btn" (click)="auth.logout()">
+        CERRAR SESIÓN
+      </button>
+    }
+
+  </div>
 
 </nav>
 

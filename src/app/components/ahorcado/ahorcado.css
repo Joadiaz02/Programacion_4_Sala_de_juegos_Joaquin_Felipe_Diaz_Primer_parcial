@@ -1,0 +1,296 @@
+.ahorcado-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.juego-card {
+  background: rgba(5, 5, 25, 0.9);
+  border: 3px solid #ff00ff;
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px rgba(255, 0, 255, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  width: 700px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.juego-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titulo {
+  color: #ff00ff;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  font-size: 24px;
+  text-shadow: 0 0 10px #ff00ff;
+  margin: 0;
+}
+
+.header-btns {
+  display: flex;
+  gap: 10px;
+}
+
+.retro-btn-sm {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 8px 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn-sm:hover {
+  background: #00e5ff;
+  color: black;
+}
+
+.svg-container {
+  width: 200px;
+  height: 250px;
+}
+
+.palabra-container {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.letra-slot {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: #00e5ff;
+  border-bottom: 3px solid #00e5ff;
+  width: 30px;
+  text-align: center;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: rgba(0, 229, 255, 0.7);
+}
+
+.descripcion-box {
+  background: rgba(0, 229, 255, 0.1);
+  border: 2px solid #00e5ff;
+  padding: 15px;
+  border-radius: 10px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: #00e5ff;
+  text-align: center;
+  width: 100%;
+}
+
+.comodines-container {
+  width: 100%;
+  text-align: center;
+}
+
+.comodines-titulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  color: rgba(255, 0, 255, 0.7);
+  margin-bottom: 10px;
+}
+
+.comodines-btns {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.comodin-btn {
+  background: rgba(255, 0, 255, 0.2);
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 10px 15px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: 10px;
+}
+
+.comodin-btn:hover:not([disabled]) {
+  background: #ff00ff;
+  transform: scale(1.1);
+}
+
+.comodin-btn[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.teclado {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+  max-width: 600px;
+}
+
+.tecla {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  width: 42px;
+  height: 42px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.tecla:hover:not([disabled]) {
+  background: #00e5ff;
+  color: black;
+}
+
+.tecla.usada {
+  opacity: 0.2;
+  cursor: not-allowed;
+}
+
+.tecla.correcta {
+  border-color: #00ff88;
+  color: #00ff88;
+  opacity: 1;
+}
+
+.pausa-msg {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 24px;
+  color: #ff00ff;
+  text-shadow: 0 0 20px #ff00ff;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+
+.modal-card {
+  background: rgba(5, 5, 25, 0.95);
+  border: 3px solid #ff00ff;
+  box-shadow: 0 0 30px #ff00ff;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-titulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.victoria {
+  color: #00ff88;
+  text-shadow: 0 0 20px #00ff88;
+}
+
+.derrota {
+  color: #ff4444;
+  text-shadow: 0 0 20px #ff4444;
+}
+
+.modal-palabra {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 14px;
+  color: #00e5ff;
+}
+
+.modal-palabra span {
+  color: #ff00ff;
+  font-size: 18px;
+}
+
+.modal-stats {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: rgba(0, 229, 255, 0.7);
+}
+
+.modal-btns {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.retro-btn {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 12px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn:hover {
+  background: #00e5ff;
+  color: black;
+}
+
+.retro-btn-magenta {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 12px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn-magenta:hover {
+  background: #ff00ff;
+  color: black;
+}
+
+@media (max-width: 768px) {
+  .juego-card {
+    width: 100%;
+    padding: 20px;
+  }
+
+  .tecla {
+    width: 35px;
+    height: 35px;
+    font-size: 10px;
+  }
+}

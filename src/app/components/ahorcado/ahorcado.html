@@ -1,0 +1,147 @@
+<div class="ahorcado-container">
+
+  <!-- MODAL FIN DE PARTIDA -->
+  @if (ahorcadoService.juegoTerminado()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        @if (ahorcadoService.gano()) {
+          <h1 class="modal-titulo victoria">⚡ VICTORIA ⚡</h1>
+        } @else {
+          <h1 class="modal-titulo derrota">💀 DERROTA 💀</h1>
+        }
+        <p class="modal-palabra">La palabra era: <span>{{ ahorcadoService.palabra() }}</span></p>
+        <p class="modal-stats">Letras usadas: {{ ahorcadoService.letrasUsadas().length }}</p>
+        <p class="modal-stats">Tiempo: {{ ahorcadoService.tiempoSegundos() }}s</p>
+        <div class="modal-btns">
+          <button class="retro-btn" (click)="jugarDeNuevo()">JUGAR DE NUEVO</button>
+          <button class="retro-btn-magenta" routerLink="/">VOLVER AL MENÚ</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- MODAL ELEGIR COMODIN -->
+  @if (mostrarModalComodin) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+        <h2 class="modal-titulo victoria">🎉 GANASTE UN COMODÍN</h2>
+        <p>Elegí tu comodín:</p>
+        <div class="modal-btns">
+          <button class="retro-btn" (click)="elegirComodin('revelar_letra')">🔤 REVELAR LETRA</button>
+          <button class="retro-btn" (click)="elegirComodin('ver_descripcion')">📖 VER DESCRIPCIÓN</button>
+          <button class="retro-btn" (click)="elegirComodin('revelar_consonante')">❓ REVELAR CONSONANTE</button>
+        </div>
+      </div>
+    </div>
+  }
+
+  <!-- JUEGO -->
+  <div class="juego-card">
+
+    <div class="juego-header">
+      <h1 class="titulo">&lt; AHORCADO &gt;</h1>
+      <div class="header-btns">
+        <button class="retro-btn-sm" (click)="togglePausa()">
+          {{ ahorcadoService.pausado() ? '▶ CONTINUAR' : '⏸ PAUSA' }}
+        </button>
+      </div>
+    </div>
+
+    <!-- SVG MUÑECO -->
+    <div class="svg-container">
+      <svg viewBox="0 0 200 250" xmlns="http://www.w3.org/2000/svg">
+        <!-- estructura -->
+        <line x1="20" y1="240" x2="180" y2="240" stroke="#00e5ff" stroke-width="4"/>
+        <line x1="60" y1="240" x2="60" y2="10" stroke="#00e5ff" stroke-width="4"/>
+        <line x1="60" y1="10" x2="130" y2="10" stroke="#00e5ff" stroke-width="4"/>
+        <line x1="130" y1="10" x2="130" y2="40" stroke="#00e5ff" stroke-width="4"/>
+        <!-- cabeza -->
+        @if (ahorcadoService.errores() >= 1) {
+          <circle cx="130" cy="60" r="20" stroke="#ff00ff" stroke-width="3" fill="none"/>
+        }
+        <!-- cuerpo -->
+        @if (ahorcadoService.errores() >= 2) {
+          <line x1="130" y1="80" x2="130" y2="150" stroke="#ff00ff" stroke-width="3"/>
+        }
+        <!-- brazo izquierdo -->
+        @if (ahorcadoService.errores() >= 3) {
+          <line x1="130" y1="100" x2="100" y2="130" stroke="#ff00ff" stroke-width="3"/>
+        }
+        <!-- brazo derecho -->
+        @if (ahorcadoService.errores() >= 4) {
+          <line x1="130" y1="100" x2="160" y2="130" stroke="#ff00ff" stroke-width="3"/>
+        }
+        <!-- pierna izquierda -->
+        @if (ahorcadoService.errores() >= 5) {
+          <line x1="130" y1="150" x2="100" y2="190" stroke="#ff00ff" stroke-width="3"/>
+        }
+        <!-- pierna derecha -->
+        @if (ahorcadoService.errores() >= 6) {
+          <line x1="130" y1="150" x2="160" y2="190" stroke="#ff00ff" stroke-width="3"/>
+        }
+      </svg>
+    </div>
+
+    <!-- PALABRA -->
+    <div class="palabra-container">
+      @for (letra of ahorcadoService.palabraVisible(); track $index) {
+        <span class="letra-slot">{{ letra }}</span>
+      }
+    </div>
+
+    <!-- DESCRIPCION COMODIN -->
+    @if (mostrarDescripcion) {
+      <div class="descripcion-box">
+        📖 {{ descripcionComodin }}
+      </div>
+    }
+
+    <!-- STATS -->
+    <div class="stats">
+      <span>Errores: {{ ahorcadoService.errores() }}/{{ ahorcadoService.maxErrores }}</span>
+      <span>Tiempo: {{ ahorcadoService.tiempoSegundos() }}s</span>
+      <span>Partidas seguidas: {{ ahorcadoService.partidasGanadasSeguidas() }}</span>
+    </div>
+
+    <!-- COMODINES -->
+    @if (ahorcadoService.comodines().length > 0) {
+      <div class="comodines-container">
+        <p class="comodines-titulo">MIS COMODINES:</p>
+        <div class="comodines-btns">
+          @for (comodin of ahorcadoService.comodines(); track comodin.id) {
+            <button
+              class="comodin-btn"
+              [disabled]="comodinUsadoEnPartida"
+              (click)="usarComodin(comodin.id, comodin.tipo)"
+            >
+              @if (comodin.tipo === 'revelar_letra') { 🔤 }
+              @if (comodin.tipo === 'ver_descripcion') { 📖 }
+              @if (comodin.tipo === 'revelar_consonante') { ❓ }
+            </button>
+          }
+        </div>
+      </div>
+    }
+
+    <!-- TECLADO -->
+    @if (!ahorcadoService.pausado()) {
+      <div class="teclado">
+        @for (letra of abecedario; track letra) {
+          <button
+            class="tecla"
+            [class.usada]="ahorcadoService.letrasUsadas().includes(letra)"
+            [class.correcta]="ahorcadoService.palabra().includes(letra) && ahorcadoService.letrasUsadas().includes(letra)"
+            [disabled]="ahorcadoService.letrasUsadas().includes(letra) || ahorcadoService.juegoTerminado()"
+            (click)="elegirLetra(letra)"
+          >
+            {{ letra }}
+          </button>
+        }
+      </div>
+    } @else {
+      <div class="pausa-msg">⏸ JUEGO EN PAUSA</div>
+    }
+
+  </div>
+
+</div>

@@ -1,1 +1,109 @@
-<p>mayor-menor works!</p>
+<div class="ahorcado-container">
+
+  <div class="juego-card">
+
+    <div class="juego-header">
+
+      <h1 class="titulo">
+        MAYOR O MENOR
+      </h1>
+
+    </div>
+
+    <div class="carta-container">
+
+      <div class="carta">
+
+        {{ mostrarValor(juego.cartaActual()?.valor) }}
+
+        {{ juego.cartaActual()?.palo }}
+
+      </div>
+
+    </div>
+
+    <div class="stats">
+
+      <span>
+        ACIERTOS:
+        {{ juego.cartasAcertadas() }}
+      </span>
+
+      <span>
+        TIEMPO:
+        {{ juego.tiempoSegundos() }}s
+      </span>
+
+    </div>
+
+    <div class="botones">
+
+      <button
+        class="retro-btn"
+        (click)="juego.elegirMayor()">
+
+        MAYOR
+
+      </button>
+
+      <button
+        class="retro-btn-magenta"
+        (click)="juego.elegirMenor()">
+
+        MENOR
+
+      </button>
+
+    </div>
+
+  </div>
+
+</div>
+
+@if (juego.partidaTerminada()) {
+
+<div class="modal-overlay">
+
+  <div class="modal-card">
+
+    <h2 class="modal-titulo derrota">
+
+      GAME OVER
+
+    </h2>
+
+    <div class="modal-stats">
+
+      Cartas acertadas:
+
+      {{ juego.cartasAcertadas() }}
+
+    </div>
+
+    <div class="modal-stats">
+
+      Tiempo:
+
+      {{ juego.tiempoSegundos() }} segundos
+
+    </div>
+
+    <div class="modal-btns">
+
+      <button
+        class="retro-btn"
+        (click)="juego.iniciarJuego()">
+
+        JUGAR OTRA VEZ
+
+      </button>
+
+      <button type="button" routerLink="/" class="retro-btn-magenta">VOLVER AL MENÚ</button>
+
+    </div>
+
+  </div>
+
+</div>
+
+}

@@ -6,6 +6,7 @@ import { Registro } from './components/registro/registro';
 import { QuienSoyComponent } from './components/quien-soy/quien-soy';
 import { authGuard } from './guards/auth-guard';
 import { Ahorcado } from './components/ahorcado/ahorcado';
+import { MayorMenor } from './components/mayor-menor/mayor-menor';
 
 export const routes: Routes = [
   {
@@ -29,6 +30,11 @@ export const routes: Routes = [
   {
   path: 'ahorcado',
   component: Ahorcado,
+  canActivate: [authGuard]
+  },
+  {
+  path: 'mayor-menor',
+  component: MayorMenor,
   canActivate: [authGuard]
   }
 ];

@@ -1,0 +1,84 @@
+@if(auth.isAuthenticated()) {
+
+<button
+  class="chat-toggle"
+  (click)="toggleChat()">
+
+  <img
+    src="/assets/icons/chat-glow.png"
+    class="chat-icon">
+
+  @if (mensajesNoVistos() > 0) {
+
+    <span class="badge">
+
+      {{ mensajesNoVistos() }}
+
+    </span>
+
+  }
+
+</button>
+
+<div
+  class="chat-panel"
+  [class.abierto]="abierto()">
+
+  <div class="chat-header">
+
+    CHAT GLOBAL
+
+  </div>
+
+  <div class="mensajes">
+
+    @for(msg of chat.mensajes(); track msg.id) {
+
+      <div
+        class="mensaje"
+        [class.mio]="esMio(msg.usuario_id)">
+
+        <div class="autor">
+
+          {{ msg.usuarios?.nombre }}
+          {{ msg.usuarios?.apellido }}
+
+        </div>
+
+        <div class="texto">
+
+          {{ msg.contenido }}
+
+        </div>
+
+        <div class="hora">
+
+          {{ formatearFechaHora(msg.created_at) }}
+
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  <div class="input-area">
+
+    <input
+      [(ngModel)]="nuevoMensaje"
+      (keyup.enter)="enviar()"
+      placeholder="Escribí un mensaje..." />
+
+    <button
+      (click)="enviar()">
+
+      ➤
+
+    </button>
+
+  </div>
+
+</div>
+
+}

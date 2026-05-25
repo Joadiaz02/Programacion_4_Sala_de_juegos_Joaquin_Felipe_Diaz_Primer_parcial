@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, inject } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AhorcadoService } from '../../services/ahorcadoService/ahorcado';
 import { AuthService } from '../../services/authService/auth';
@@ -87,6 +87,41 @@ export class Ahorcado implements OnInit, OnDestroy {
       this.descripcionComodin = resultado;
     }
   }
+
+  comodinesAgrupados = computed(() => {
+
+  const agrupados: {
+    tipo: string;
+    cantidad: number;
+    id: string;
+  }[] = [];
+
+  for (const comodin of this.ahorcadoService.comodines()) {
+
+    const existente =
+      agrupados.find(
+        c => c.tipo === comodin.tipo
+      );
+
+    if (existente) {
+
+      existente.cantidad++;
+
+    } else {
+
+      agrupados.push({
+        tipo: comodin.tipo,
+        cantidad: 1,
+        id: comodin.id
+      });
+
+    }
+
+  }
+
+  return agrupados;
+
+});
 
   async jugarDeNuevo() {
     clearInterval(this.timer);

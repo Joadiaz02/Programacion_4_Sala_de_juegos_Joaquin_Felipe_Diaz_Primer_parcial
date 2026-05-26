@@ -1,0 +1,217 @@
+<div class="resultados-container">
+
+  <div class="resultados-card">
+
+    <div class="header">
+
+      <h1 class="titulo">
+        &lt; RESULTADOS &gt;
+      </h1>
+
+      <button
+        class="retro-btn-magenta"
+        routerLink="/">
+
+        VOLVER AL MENÚ
+
+      </button>
+
+    </div>
+
+    <div class="tabs">
+
+      <button
+        class="tab-btn"
+        [class.activa]="juegoActivo() === 'ahorcado'"
+        (click)="cambiarJuego('ahorcado')">
+
+        AHORCADO
+
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.activa]="juegoActivo() === 'mayor-menor'"
+        (click)="cambiarJuego('mayor-menor')">
+
+        MAYOR O MENOR
+
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.activa]="juegoActivo() === 'preguntados'"
+        (click)="cambiarJuego('preguntados')">
+
+        PREGUNTADOS
+
+      </button>
+
+      <button
+        class="tab-btn"
+        [class.activa]="juegoActivo() === 'sopa-letras'"
+        (click)="cambiarJuego('sopa-letras')">
+
+        SOPA DE LETRAS
+
+      </button>
+
+    </div>
+
+    <section class="tabla-section">
+
+      @if (juegoActivo() === 'ahorcado') {
+
+        <h2>AHORCADO</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Resultado</th>
+              <th>Palabra</th>
+              <th>Letras</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (r of resultadosPaginados(); track r.id) {
+              <tr>
+                <td>{{ r.usuario_nombre }}</td>
+                <td>{{ r.gano ? 'Ganó' : 'Perdió' }}</td>
+                <td>{{ r.palabra }}</td>
+                <td>{{ r.letras_seleccionadas }}</td>
+                <td>{{ r.tiempo_segundos }}s</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+      }
+
+      @if (juegoActivo() === 'mayor-menor') {
+
+        <h2>MAYOR O MENOR</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Cartas acertadas</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (r of resultadosPaginados(); track r.id) {
+              <tr>
+                <td>{{ r.usuario_nombre }}</td>
+                <td>{{ r.cartas_acertadas }}</td>
+                <td>{{ r.tiempo_segundos }}s</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+      }
+
+      @if (juegoActivo() === 'preguntados') {
+
+        <h2>PREGUNTADOS</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Aciertos</th>
+              <th>Total</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (r of resultadosPaginados(); track r.id) {
+              <tr>
+                <td>{{ r.usuario_nombre }}</td>
+                <td>{{ r.aciertos }}</td>
+                <td>{{ r.preguntas_totales }}</td>
+                <td>{{ r.tiempo_segundos }}s</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+      }
+
+      @if (juegoActivo() === 'sopa-letras') {
+
+        <h2>SOPA DE LETRAS</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Jugador</th>
+              <th>Palabras encontradas</th>
+              <th>Total</th>
+              <th>Tiempo</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            @for (r of resultadosPaginados(); track r.id) {
+              <tr>
+                <td>{{ r.usuario_nombre }}</td>
+                <td>{{ r.palabras_encontradas }}</td>
+                <td>{{ r.palabras_totales }}</td>
+                <td>{{ r.tiempo_segundos }}s</td>
+              </tr>
+            }
+          </tbody>
+        </table>
+
+      }
+
+      @if (resultadosActuales().length === 0) {
+
+        <p class="sin-resultados">
+          Todavía no hay resultados para este juego.
+        </p>
+
+      }
+
+    </section>
+
+    @if (resultadosActuales().length > resultadosPorPagina) {
+
+      <div class="paginacion">
+
+        <button
+          class="retro-btn"
+          [disabled]="paginaActual() === 1"
+          (click)="paginaAnterior()">
+
+          ANTERIOR
+
+        </button>
+
+        <span>
+          Página {{ paginaActual() }} de {{ totalPaginas() }}
+        </span>
+
+        <button
+          class="retro-btn"
+          [disabled]="paginaActual() === totalPaginas()"
+          (click)="paginaSiguiente()">
+
+          SIGUIENTE
+
+        </button>
+
+      </div>
+
+    }
+
+  </div>
+
+</div>

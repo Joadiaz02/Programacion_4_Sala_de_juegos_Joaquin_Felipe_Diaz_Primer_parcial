@@ -1,0 +1,173 @@
+<div class="preguntados-container">
+
+  @if (preguntadosService.cargando()) {
+    <div class="juego-card">
+      <h1 class="titulo">&lt; CARGANDO PREGUNTAS... &gt;</h1>
+    </div>
+  } @else {
+
+    <div class="juego-card">
+
+      <div class="juego-header">
+        <h1 class="titulo">&lt; PREGUNTADOS &gt;</h1>
+      </div>
+
+      <div class="stats">
+        <span>
+          Pregunta:
+          {{ preguntadosService.indicePregunta() + 1 }}/{{ preguntadosService.preguntas().length }}
+        </span>
+
+        <span>
+          Aciertos:
+          {{ preguntadosService.aciertos() }}
+        </span>
+
+        <span>
+          Tiempo:
+          {{ preguntadosService.tiempoSegundos() }}s
+        </span>
+      </div>
+
+      <div class="categoria-box">
+        {{ preguntadosService.preguntaActual()?.categoria }}
+      </div>
+
+      <div class="pregunta-box">
+        {{ preguntadosService.preguntaActual()?.pregunta }}
+      </div>
+
+      <div class="opciones-container">
+        @for (opcion of preguntadosService.preguntaActual()?.opciones; track opcion) {
+          <button
+            class="opcion-btn"
+            [disabled]="mostrarModalCorrecto() || mostrarModalDerrota() || preguntadosService.juegoTerminado()"
+            (click)="responder(opcion)">
+            {{ opcion }}
+          </button>
+        }
+      </div>
+
+      <div class="terminar-container">
+        <button
+        class="retro-btn-magenta"
+        [disabled]="mostrarModalCorrecto() || mostrarModalDerrota() || preguntadosService.juegoTerminado()"
+        (click)="terminarPartida()">
+        TERMINAR PARTIDA
+        </button>
+    </div>
+
+    </div>
+  }
+
+  @if (mostrarModalCorrecto()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+
+        <h1 class="modal-titulo victoria">
+          CORRECTO
+        </h1>
+
+        <p class="modal-palabra">
+          Respuesta:
+          <span>{{ preguntadosService.preguntaActual()?.correcta }}</span>
+        </p>
+
+        <p class="modal-stats">
+          Aciertos: {{ preguntadosService.aciertos() }}
+        </p>
+
+        <div class="modal-btns">
+          <button
+            class="retro-btn"
+            (click)="siguientePregunta()">
+            SIGUIENTE PREGUNTA
+          </button>
+
+          <button
+            class="retro-btn-magenta"
+            (click)="terminarPartida()">
+            TERMINAR PARTIDA
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  @if (mostrarModalDerrota()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+
+        <h1 class="modal-titulo derrota">
+          INCORRECTO - DERROTA
+        </h1>
+
+        <p class="modal-palabra">
+          La respuesta correcta era:
+          <span>{{ preguntadosService.preguntaActual()?.correcta }}</span>
+        </p>
+
+        <p class="modal-stats">
+          Aciertos: {{ preguntadosService.aciertos() }}
+        </p>
+
+        <p class="modal-stats">
+          Tiempo: {{ preguntadosService.tiempoSegundos() }}s
+        </p>
+
+        <div class="modal-btns">
+          <button
+            class="retro-btn"
+            (click)="jugarDeNuevo()">
+            JUGAR DE NUEVO
+          </button>
+
+          <button
+            class="retro-btn-magenta"
+            routerLink="/">
+            VOLVER AL MENÚ
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+  @if (preguntadosService.juegoTerminado() && preguntadosService.gano()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+
+        <h1 class="modal-titulo victoria">
+          RESUMEN DE PARTIDA
+        </h1>
+
+        <p class="modal-stats">
+          Preguntas acertadas:
+          {{ preguntadosService.aciertos() }}/{{ preguntadosService.preguntas().length }}
+        </p>
+
+        <p class="modal-stats">
+          Tiempo:
+          {{ preguntadosService.tiempoSegundos() }}s
+        </p>
+
+        <div class="modal-btns">
+          <button
+            class="retro-btn"
+            (click)="jugarDeNuevo()">
+            JUGAR DE NUEVO
+          </button>
+
+          <button
+            class="retro-btn-magenta"
+            routerLink="/">
+            VOLVER AL MENÚ
+          </button>
+        </div>
+
+      </div>
+    </div>
+  }
+
+</div>

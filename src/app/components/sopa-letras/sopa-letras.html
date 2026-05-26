@@ -1,0 +1,226 @@
+<div class="sopa-container">
+
+  <!-- MODAL INSTRUCCIONES -->
+  @if (mostrarInstrucciones()) {
+    <div class="modal-overlay">
+      <div class="modal-card">
+
+        <h1 class="modal-titulo victoria">
+          ¿CÓMO JUGAR?
+        </h1>
+
+        <p class="modal-stats">
+          Buscá las palabras ocultas en la grilla.
+        </p>
+
+        <p class="modal-stats">
+          Hacé click en la primera letra de una palabra y después en la última.
+        </p>
+
+        <p class="modal-stats">
+          Solo se aceptan palabras en horizontal o vertical.
+        </p>
+
+        <p class="modal-stats">
+          Encontrá todas las palabras para completar la partida.
+        </p>
+
+        <p class="modal-stats">
+          Podés terminar la partida cuando quieras.
+        </p>
+
+        <div class="modal-btns">
+
+          <button
+            class="retro-btn"
+            (click)="cerrarInstrucciones()">
+
+            EMPEZAR
+
+          </button>
+
+        </div>
+
+      </div>
+    </div>
+  }
+
+  <div class="juego-card">
+
+    <div class="juego-header">
+
+      <h1 class="titulo">
+        &lt; SOPA DE LETRAS &gt;
+      </h1>
+
+      <button
+        class="retro-btn-sm"
+        (click)="abrirInstrucciones()">
+
+        ¿CÓMO JUGAR?
+
+      </button>
+
+    </div>
+
+    <div class="stats">
+
+      <span>
+        Encontradas:
+        {{ sopaService.palabrasEncontradas() }}/{{ sopaService.palabrasTotales() }}
+      </span>
+
+      <span>
+        Tiempo:
+        {{ sopaService.tiempoSegundos() }}s
+      </span>
+
+    </div>
+
+    <div class="instrucciones">
+
+      Click en la primera letra y después click en la última letra.
+
+    </div>
+
+    <div class="contenido-juego">
+
+      <div class="grilla">
+
+        @for (
+          fila of sopaService.grilla();
+          track filaIndex;
+          let filaIndex = $index
+        ) {
+
+          <div class="fila">
+
+            @for (
+              letra of fila;
+              track colIndex;
+              let colIndex = $index
+            ) {
+
+              <button
+                class="celda"
+                [class.seleccionada]="celdaSeleccionada(filaIndex, colIndex)"
+                [class.encontrada]="celdaEncontrada(filaIndex, colIndex)"
+                [disabled]="sopaService.juegoTerminado()"
+                (click)="seleccionarCelda(filaIndex, colIndex)">
+
+                {{ letra }}
+
+              </button>
+
+            }
+
+          </div>
+
+        }
+
+      </div>
+
+      <div class="panel-palabras">
+
+        <h2>
+          PALABRAS
+        </h2>
+
+        @for (
+          palabra of sopaService.palabras();
+          track palabra
+        ) {
+
+          <div
+            class="palabra-item"
+            [class.encontrada]="
+              sopaService.encontradas().includes(palabra)
+            ">
+
+            {{ palabra }}
+
+          </div>
+
+        }
+
+      </div>
+
+    </div>
+
+    @if (mensaje()) {
+
+      <div class="mensaje">
+
+        {{ mensaje() }}
+
+      </div>
+
+    }
+
+    <button
+      class="retro-btn-magenta"
+      [disabled]="sopaService.juegoTerminado()"
+      (click)="terminarPartida()">
+
+      TERMINAR PARTIDA
+
+    </button>
+
+  </div>
+
+  <!-- MODAL FINAL -->
+  @if (sopaService.juegoTerminado()) {
+
+    <div class="modal-overlay">
+
+      <div class="modal-card">
+
+        <h1 class="modal-titulo victoria">
+
+          RESUMEN DE PARTIDA
+
+        </h1>
+
+        <p class="modal-stats">
+
+          Palabras encontradas:
+
+          {{ sopaService.palabrasEncontradas() }}/{{ sopaService.palabrasTotales() }}
+
+        </p>
+
+        <p class="modal-stats">
+
+          Tiempo:
+
+          {{ sopaService.tiempoSegundos() }}s
+
+        </p>
+
+        <div class="modal-btns">
+
+          <button
+            class="retro-btn"
+            (click)="jugarDeNuevo()">
+
+            JUGAR DE NUEVO
+
+          </button>
+
+          <button
+            class="retro-btn-magenta"
+            routerLink="/">
+
+            VOLVER AL MENÚ
+
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  }
+
+</div>

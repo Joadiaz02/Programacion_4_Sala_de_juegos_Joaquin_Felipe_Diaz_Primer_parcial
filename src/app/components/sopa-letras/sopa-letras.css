@@ -23,7 +23,8 @@
 .juego-header {
   width: 100%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .titulo {
@@ -195,6 +196,22 @@
 button[disabled] {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+.retro-btn-sm {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 8px 15px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn-sm:hover {
+  background: #00e5ff;
+  color: black;
 }
 
 /* MODAL */

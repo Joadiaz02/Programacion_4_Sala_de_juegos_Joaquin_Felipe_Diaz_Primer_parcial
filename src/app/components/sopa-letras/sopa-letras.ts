@@ -24,6 +24,8 @@ export class SopaLetras implements OnInit, OnDestroy {
 
   mensaje = signal('');
 
+  mostrarInstrucciones = signal(true);
+
   seleccionInicio = signal<{ fila: number; col: number } | null>(null);
 
   celdasSeleccionadas = signal<{ fila: number; col: number }[]>([]);
@@ -42,7 +44,7 @@ export class SopaLetras implements OnInit, OnDestroy {
 
   iniciarJuego() {
     clearInterval(this.timer);
-
+    this.mostrarInstrucciones.set(true);
     this.mensaje.set('');
     this.seleccionInicio.set(null);
     this.celdasSeleccionadas.set([]);
@@ -138,5 +140,13 @@ export class SopaLetras implements OnInit, OnDestroy {
 
   jugarDeNuevo() {
     this.iniciarJuego();
+  }
+
+  abrirInstrucciones() {
+  this.mostrarInstrucciones.set(true);
+  }
+
+  cerrarInstrucciones() {
+    this.mostrarInstrucciones.set(false);
   }
 }

@@ -26,6 +26,10 @@
       QUIÉN SOY
     </button>
 
+    <button routerLink="/resultados" routerLinkActive="active-btn">
+    RESULTADOS
+    </button>
+
     @if (auth.isAuthenticated()) {
       <button class="logout-btn" (click)="auth.logout()">
         CERRAR SESIÓN

@@ -9,6 +9,7 @@ import { Ahorcado } from './components/ahorcado/ahorcado';
 import { MayorMenor } from './components/mayor-menor/mayor-menor';
 import { Preguntados } from './components/preguntados/preguntados';
 import { SopaLetras } from './components/sopa-letras/sopa-letras';
+import { Resultados } from './components/resultados/resultados';
 
 export const routes: Routes = [
   {
@@ -47,6 +48,11 @@ export const routes: Routes = [
 {
   path: 'sopa-letras',
   component: SopaLetras,
+  canActivate: [authGuard]
+},
+{
+  path: 'resultados',
+  component: Resultados,
   canActivate: [authGuard]
 }
 ];

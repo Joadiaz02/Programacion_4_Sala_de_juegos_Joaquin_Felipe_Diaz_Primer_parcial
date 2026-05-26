@@ -1,0 +1,262 @@
+.sopa-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.juego-card {
+  background: rgba(5, 5, 25, 0.9);
+  border: 3px solid #ff00ff;
+  box-shadow: 0 0 20px #ff00ff, 0 0 40px rgba(255, 0, 255, 0.4);
+  border-radius: 20px;
+  padding: 30px;
+  width: 900px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.juego-header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.titulo {
+  color: #ff00ff;
+  font-family: 'Orbitron', sans-serif;
+  letter-spacing: 2px;
+  font-size: 24px;
+  text-shadow: 0 0 10px #ff00ff;
+  margin: 0;
+}
+
+.stats {
+  display: flex;
+  gap: 30px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: rgba(0, 229, 255, 0.7);
+}
+
+.contenido-juego {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+}
+
+.grilla {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.fila {
+  display: flex;
+  gap: 4px;
+}
+
+.celda {
+  width: 32px;
+  height: 32px;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 13px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-shadow: 0 0 10px #00e5ff;
+  background: rgba(0, 229, 255, 0.08);
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.celda:hover:not([disabled]) {
+  background: #00e5ff;
+  color: black;
+  box-shadow: 0 0 15px #00e5ff;
+}
+
+.celda.seleccionada {
+  background: #ff00ff;
+  color: black;
+  border-color: #ff00ff;
+  box-shadow: 0 0 20px #ff00ff;
+}
+
+.celda.encontrada {
+  background: #00ff88;
+  color: black;
+  border-color: #00ff88;
+  box-shadow: 0 0 20px #00ff88;
+}
+
+.instrucciones {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  color: #00e5ff;
+  text-align: center;
+  text-shadow: 0 0 10px #00e5ff;
+}
+
+.panel-palabras {
+  border: 2px solid #ff00ff;
+  border-radius: 15px;
+  padding: 20px;
+  min-width: 200px;
+  background: rgba(255, 0, 255, 0.08);
+}
+
+.panel-palabras h2 {
+  margin-top: 0;
+  color: #ff00ff;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 16px;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.palabra-item {
+  font-family: 'Orbitron', sans-serif;
+  color: #00e5ff;
+  font-size: 12px;
+  margin-bottom: 12px;
+}
+
+.palabra-item.encontrada {
+  color: #00ff88;
+  text-decoration: line-through;
+  text-shadow: 0 0 10px #00ff88;
+}
+
+.input-area-sopa {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.input-area-sopa input {
+  width: 350px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 2px solid #00e5ff;
+  color: white;
+  padding: 12px;
+  font-family: 'Orbitron', sans-serif;
+  outline: none;
+}
+
+.mensaje {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: #ff00ff;
+  text-shadow: 0 0 10px #ff00ff;
+}
+
+.retro-btn {
+  background: transparent;
+  border: 2px solid #00e5ff;
+  color: #00e5ff;
+  padding: 12px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn:hover:not([disabled]) {
+  background: #00e5ff;
+  color: black;
+}
+
+.retro-btn-magenta {
+  background: transparent;
+  border: 2px solid #ff00ff;
+  color: #ff00ff;
+  padding: 12px 20px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 11px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.retro-btn-magenta:hover:not([disabled]) {
+  background: #ff00ff;
+  color: black;
+}
+
+button[disabled] {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+/* MODAL */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.85);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 10000;
+}
+
+.modal-card {
+  background: rgba(5, 5, 25, 0.95);
+  border: 3px solid #ff00ff;
+  box-shadow: 0 0 30px #ff00ff;
+  border-radius: 20px;
+  padding: 40px;
+  text-align: center;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  width: 90%;
+}
+
+.modal-titulo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  letter-spacing: 2px;
+}
+
+.victoria {
+  color: #00ff88;
+  text-shadow: 0 0 20px #00ff88;
+}
+
+.modal-stats {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 12px;
+  color: rgba(0, 229, 255, 0.7);
+}
+
+.modal-btns {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 900px) {
+  .juego-card {
+    width: 100%;
+  }
+
+  .contenido-juego {
+    flex-direction: column;
+    align-items: center;
+  }
+}

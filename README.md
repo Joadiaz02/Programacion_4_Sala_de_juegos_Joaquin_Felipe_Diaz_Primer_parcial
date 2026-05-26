@@ -22,7 +22,7 @@ Configuración inicial del proyecto. Desarrollo del componente Quién Soy con in
 Implementación del sistema de autenticación con Supabase. Login con validación y 3 botones de acceso rápido. Registro de usuarios con guardado en base de datos. Home dinámico que muestra contenido según el estado de sesión. Guards para protección de rutas.
 
 ### Sprint 3
-Creación de juego Ahorcado, Mayor o Menor y Sala de Chat.
+Desarrollo de los juegos interactivos Ahorcado y Mayor o Menor utilizando lógica dinámica en Angular y manejo reactivo del estado. Implementación de la Sala de Chat en tiempo real conectada con Supabase, permitiendo el envío y visualización instantánea de mensajes entre usuarios autenticados. Integración de control de puntajes y experiencia visual con animaciones y diseño retro/neón.
 
 ### Sprint 4
-Creación de juego Preguntados, Juego propio (Sopa de Letras) y Listados de resultados.
+Desarrollo del juego Preguntados consumiendo preguntas dinámicas y sistema de validación de respuestas. Creación del juego propio “Sopa de Letras”, incluyendo generación automática de palabras, selección interactiva de celdas, validación de coincidencias y animaciones visuales. Implementación del listado de resultados con almacenamiento y visualización de puntajes por usuario, organizados por juego y paginados de navegación.
